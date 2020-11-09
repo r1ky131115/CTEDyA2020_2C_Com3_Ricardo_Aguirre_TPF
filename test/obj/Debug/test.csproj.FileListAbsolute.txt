@@ -1,0 +1,46 @@
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\obj\Debug\DeepSpace.Form1.resources
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\obj\Debug\test.csproj.GenerateResource.Cache
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\test.exe.config
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\test.exe
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\test.pdb
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.dll
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.DXGI.dll
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Mathematics.dll
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.pdb
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Direct2D1.pdb
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Direct2D1.xml
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Direct3D11.pdb
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Direct3D11.xml
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.DXGI.pdb
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.DXGI.xml
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Mathematics.pdb
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\bin\Debug\SharpDX.Mathematics.xml
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\obj\Debug\test.Form1.resources
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\obj\Debug\test.exe
+C:\Users\pp\Desktop\CTEDA\tallerReadyPuertaAbiertas\tallerplwars\testcshar\test\test\obj\Debug\test.pdb
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\obj\Debug\DeepSpace.Form1.resources
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\obj\Debug\test.Form1.resources
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\obj\Debug\test.csproj.GenerateResource.Cache
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\obj\Debug\test.exe
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\test.exe.config
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\test.exe
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\test.pdb
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.dll
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.DXGI.dll
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Mathematics.dll
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.pdb
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Direct2D1.pdb
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Direct2D1.xml
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Direct3D11.pdb
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Direct3D11.xml
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.DXGI.pdb
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.DXGI.xml
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Mathematics.pdb
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\bin\Debug\SharpDX.Mathematics.xml
+C:\Users\pp\Desktop\CTEDA\CTEDA 2020 2do\TPF\test\test\obj\Debug\test.pdb
