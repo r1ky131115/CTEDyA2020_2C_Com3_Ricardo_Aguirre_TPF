@@ -1,5 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DeepSpace
 {
@@ -15,6 +19,10 @@ namespace DeepSpace
 	
 		public T getDatoRaiz() {
 			return this.dato;
+		}
+		
+		public bool esVacia() {
+			return this.hijos.Count == 0;
 		}
 	
 		public List<ArbolGeneral<T>> getHijos() {
@@ -39,6 +47,13 @@ namespace DeepSpace
 	
 		
 		public int nivel(T dato) {
+			if (!this.esHoja()) {
+				foreach (var h in this.getHijos()) {
+					int alturaMax = h.getHijos().Count;
+					h.altura();
+					return alturaMax + 1;
+				}
+			}
 			return 0;
 		}
 	
