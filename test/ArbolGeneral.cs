@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace DeepSpace
 {
@@ -19,10 +15,6 @@ namespace DeepSpace
 	
 		public T getDatoRaiz() {
 			return this.dato;
-		}
-		
-		public bool esVacia() {
-			return this.hijos.Count == 0;
 		}
 	
 		public List<ArbolGeneral<T>> getHijos() {

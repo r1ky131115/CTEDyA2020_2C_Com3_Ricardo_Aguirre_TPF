@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 namespace DeepSpace
 {
 
 	class Estrategia
 	{
-		
 		public String Consulta1(ArbolGeneral<Planeta> arbol)
 		{
 			//instancio la clase cola
@@ -30,7 +28,7 @@ namespace DeepSpace
 					if (arbolAux.getDatoRaiz().EsPlanetaDeLaIA()) {
 						return "La distancia es de: " + contNivel;
 					}
-					if (!arbolAux.esVacia()) {
+					else {
 						foreach (var hijo in arbolAux.getHijos()) {
 							c.encolar(hijo);
 						}
@@ -50,27 +48,34 @@ namespace DeepSpace
 
 		public String Consulta2( ArbolGeneral<Planeta> arbol)
 		{
+			//instancio la clase cola
 			Cola<ArbolGeneral<Planeta>> c = new Cola<ArbolGeneral<Planeta>>();
 			int contador = 0;
-
+			
+			//encolamos raiz
 			c.encolar(arbol);
-
+			
+			//Mientras la cola no se vacie ira iterando
 			while (!c.esVacia())
 			{
 				arbol = c.desencolar();
-
+				
+				//Si la poblacion es mayor a 10 el contador aumenta
 				if (arbol.getDatoRaiz().Poblacion() > 10)
 				{
 					contador++;
 				}
+				
 				Console.Write(arbol.getDatoRaiz() + "  ");
-
-				foreach (var hijo in arbol.getHijos())
+				
+				//Encola los hijos del arbol pasado por parametro
+				foreach (var hijo in arbol.getHijos()){
 					c.encolar(hijo);
+				}
 			}
 			
-			//calcular cantidad de planetas con población > 10 en cada nivel del arbol (recorrido por niveles,con limitante de población)
-			return "La cantidad de planetas con población mayor a 10 son: " + contador + "  ";
+			//calcular cantidad de planetas con población > 10 en cada nivel del arbol (recorrido por niveles, con limitante de población)
+			return "La cantidad de planetas con población mayor a 10 son: " + contador + ".";
 		}
 
 
@@ -79,112 +84,145 @@ namespace DeepSpace
 			// calcular  promedio poblacion por nivel de arbol (recorrido por niveles, sumar en total y cantidad y dividir por cantidad para sacar promedio)
 			Cola<ArbolGeneral<Planeta>> c = new Cola<ArbolGeneral<Planeta>>();
 			
-			long cont = 0;
-			long canti = 0;
-
+			//Arbol auxiliar
+			ArbolGeneral<Planeta> arbolAux;
+			
+			//encolo raiz
 			c.encolar(arbol);
+			
+			//encolo null para separar niveles
+			c.encolar(null);			
+				
+			int contadorPlanetas = 0;
+			int cantidadPoblacionPorNivel = 0;
+			int nivel = 0;
+			float promedioPorNivel = 0;
+			
+			string anuncio = "";
 
 			while (!c.esVacia())
 			{
-				arbol = c.desencolar();
+				arbolAux = c.desencolar();
 				
-				foreach (var hijo in arbol.getHijos()){
-					c.encolar(hijo);
+				if (arbolAux != null) {
+					
+					//Se incrementa la cantidad de planetas por nivel
+					contadorPlanetas++;
+					
+					//Se suma la poblacion de cada planeta
+					cantidadPoblacionPorNivel += arbolAux.getDatoRaiz().Poblacion();
+					
+					//Se divide la cantidad de poblacion por nivel con la cantidad de planetas
+					promedioPorNivel = cantidadPoblacionPorNivel / contadorPlanetas;
+					
+					foreach (var hijo in arbolAux.getHijos()){
+						c.encolar(hijo);
+					}					
 				}
-				cont += arbol.getDatoRaiz().population;
-				canti++;
+				else{
+					anuncio += "El promedio de poblacion en el nivel " + nivel + " es de: " + promedioPorNivel + "\n";
+					contadorPlanetas = 0;
+					cantidadPoblacionPorNivel = 0;
+					nivel++;
+					promedioPorNivel = 0;
+					
+					if (!c.esVacia()) {
+						c.encolar(null);
+					}
+				}
+				
 			}
 			
-			Double promedio = cont / canti;
-			
-			return "El promedio de población por nivel del arbol es de: " + promedio;
+			return "Promedio de poblacion por nivel:\n" + anuncio;
 		}
 		
-		
 		public Movimiento CalcularMovimiento(ArbolGeneral<Planeta> arbol)
-		{	
-			List<Planeta> caminoRaiz = caminoConPreOrden(arbol);
-			caminoConPreOrden(arbol);
-			
-			List<Planeta> caminoHumano = caminoAtaqueJugador(arbol);
-			
-			if (!arbol.getDatoRaiz().EsPlanetaDeLaIA()) {				
-				Movimiento movRaiz = new Movimiento(caminoRaiz[caminoRaiz.Count - 1], caminoRaiz[caminoRaiz.Count - 2]);
-				
-				return movRaiz;
+		{
+		
+			List<Planeta> caminoHaciaRaiz = null;
+			List<Planeta> caminoHaciaHumano = null;
+
+			caminoHaciaRaiz = CaminoIAaRaiz(arbol, new List<Planeta>());
+			caminoHaciaRaiz.Reverse();
+
+			caminoHaciaHumano = CaminoRaizAHumano(arbol, new List<Planeta>());
+
+			if (!arbol.getDatoRaiz().EsPlanetaDeLaIA())
+			{
+				Movimiento movARaiz = new Movimiento(caminoHaciaRaiz[0], caminoHaciaRaiz[1]);
+				return movARaiz;
 			}
-			else{
+			else
+			{
 				
-				for(int index=0; index< caminoHumano.Count(); index++)
+				for(int index=0; index< caminoHaciaHumano.Count(); index++)
 				{
-					if (caminoHumano[index].EsPlanetaDeLaIA() && 
-							(caminoHumano[index+1].EsPlanetaNeutral()|| 
-								caminoHumano[index+1].EsPlanetaDelJugador()))
+					if (caminoHaciaHumano[index].EsPlanetaDeLaIA() && 
+							(caminoHaciaHumano[index+1].EsPlanetaNeutral()|| 
+								caminoHaciaHumano[index+1].EsPlanetaDelJugador()))
 					{
-						Movimiento movAhumano = new Movimiento(caminoHumano[index], caminoHumano[index+1]);
+						Movimiento movAhumano = new Movimiento(caminoHaciaHumano[index], caminoHaciaHumano[index+1]);
 						return movAhumano;
 					}
 				}
+	
 			}
-			
 			return null;
 		}
-		
-		private List<Planeta> _caminoConPreOrden(ArbolGeneral<Planeta> arbol, List<Planeta> camino){
-			//Procesamos la raiz primero
-			camino.Add(arbol.getDatoRaiz());
-				
-			//Si encontramos camino...
-			if (arbol.getDatoRaiz().EsPlanetaDeLaIA()) {
-				return camino;
+
+		public List<Planeta> CaminoIAaRaiz(ArbolGeneral<Planeta> arbol, List<Planeta> caminoDeLaIA)
+		{
+			
+			caminoDeLaIA.Add(arbol.getDatoRaiz());
+
+			if (arbol.getDatoRaiz().EsPlanetaDeLaIA())
+			{
+				return caminoDeLaIA;
 			}
-			else{
-				//luego procesamos los hijos recursivamente
-				foreach (var hijo in arbol.getHijos()){
-					List<Planeta> caminoAux = _caminoConPreOrden(hijo, camino);
-					if (caminoAux != null) {
+			else
+			{
+					foreach(var hijo in arbol.getHijos())
+					{
+					
+						List<Planeta> caminoAux = CaminoIAaRaiz(hijo, caminoDeLaIA);
+						if (caminoAux != null)
+						{
+							return caminoAux;
+						}
+					
+					}
+					caminoDeLaIA.RemoveAt(caminoDeLaIA.Count()-1);
+			}
+			return null;
+		}
+
+		public List<Planeta> CaminoRaizAHumano(ArbolGeneral<Planeta> arbol, List<Planeta> caminoDeRaizAHumano)
+		{
+
+			caminoDeRaizAHumano.Add(arbol.getDatoRaiz());
+
+			if (arbol.getDatoRaiz().EsPlanetaDelJugador())
+			{
+				return caminoDeRaizAHumano;
+			}
+			else
+			{
+				
+				foreach (var hijo in arbol.getHijos())
+				{
+
+					List<Planeta> caminoAux = CaminoRaizAHumano(hijo, caminoDeRaizAHumano);
+					if (caminoAux != null)
+					{
 						return caminoAux;
 					}
+
 				}
-				//saco ultimo planeta del camino
-				camino.RemoveAt(camino.Count - 1);
+
+				caminoDeRaizAHumano.RemoveAt(caminoDeRaizAHumano.Count() - 1);
+
 			}
 			return null;
 		}
-		
-		public List<Planeta> caminoConPreOrden(ArbolGeneral<Planeta> buscado){
-			List<Planeta> camino = new List<Planeta>();
-			return _caminoConPreOrden(buscado, camino);
-		}
-		
-		private List<Planeta> _caminoAtaqueJugador(ArbolGeneral<Planeta> arbol, List<Planeta> caminoRaizHumano){
-			
-			// Procesamos primero la raiz
-			caminoRaizHumano.Add(arbol.getDatoRaiz());
-			
-			// si se encontra camino a jugador
-			if (arbol.getDatoRaiz().EsPlanetaDelJugador()){
-				return caminoRaizHumano;
-			}
-			else{
-			
-				foreach (var hijo in arbol.getHijos()){
-					List<Planeta> caminoAuxJugador = _caminoAtaqueJugador(hijo, caminoRaizHumano);
-					
-					if (caminoAuxJugador != null){
-						return caminoAuxJugador;
-					}
-					
-					caminoRaizHumano.RemoveAt(caminoRaizHumano.Count - 1);
-				}
-			}
-			
-			return null;
-		}
-		
-		public List<Planeta> caminoAtaqueJugador(ArbolGeneral<Planeta> buscado){
-			List<Planeta> caminoDeAtaque = new List<Planeta>();
-			return _caminoConPreOrden(buscado, caminoDeAtaque);
-		}		
 	}
 }
