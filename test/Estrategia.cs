@@ -138,91 +138,103 @@ namespace DeepSpace
 		
 		public Movimiento CalcularMovimiento(ArbolGeneral<Planeta> arbol)
 		{
-		
-			List<Planeta> caminoHaciaRaiz = null;
-			List<Planeta> caminoHaciaHumano = null;
+			//Creo e instancio el camino de ataque hacia la raiz
+			List<Planeta> caminoHaciaRaiz = CaminoAtaqueARaiz(arbol);
 
-			caminoHaciaRaiz = CaminoIAaRaiz(arbol, new List<Planeta>());
-			caminoHaciaRaiz.Reverse();
-
-			caminoHaciaHumano = CaminoRaizAHumano(arbol, new List<Planeta>());
-
+			
+			//Si la raiz no le pertenece a la IA se la ataca
 			if (!arbol.getDatoRaiz().EsPlanetaDeLaIA())
 			{
-				Movimiento movARaiz = new Movimiento(caminoHaciaRaiz[0], caminoHaciaRaiz[1]);
+				Movimiento movARaiz = new Movimiento(caminoHaciaRaiz[caminoHaciaRaiz.Count - 1], caminoHaciaRaiz[caminoHaciaRaiz.Count - 2]);
 				return movARaiz;
 			}
+			// Despues de capturar la raiz ataco al humano
 			else
 			{
+				List<Planeta> caminoHaciaHumano = CaminoAtaqueAHumano(arbol);
+				int pos = 0;
 				
-				for(int index=0; index< caminoHaciaHumano.Count(); index++)
-				{
-					if (caminoHaciaHumano[index].EsPlanetaDeLaIA() && 
-							(caminoHaciaHumano[index+1].EsPlanetaNeutral()|| 
-								caminoHaciaHumano[index+1].EsPlanetaDelJugador()))
+				while (!caminoHaciaHumano[caminoHaciaHumano.Count-1].EsPlanetaDeLaIA()) {
+					if (caminoHaciaHumano[pos].EsPlanetaDeLaIA() && 
+							(caminoHaciaHumano[pos+1].EsPlanetaNeutral()|| 
+								caminoHaciaHumano[pos+1].EsPlanetaDelJugador()))
 					{
-						Movimiento movAhumano = new Movimiento(caminoHaciaHumano[index], caminoHaciaHumano[index+1]);
+						Movimiento movAhumano = new Movimiento(caminoHaciaHumano[pos], caminoHaciaHumano[pos+1]);
+						
 						return movAhumano;
 					}
+					pos++;
 				}
-	
 			}
 			return null;
 		}
 
-		public List<Planeta> CaminoIAaRaiz(ArbolGeneral<Planeta> arbol, List<Planeta> caminoDeLaIA)
-		{
-			
+		private List<Planeta> _caminoAtaqueARaiz(ArbolGeneral<Planeta> arbol, List<Planeta> caminoDeLaIA){
+			//Primero se agrega la raiz
 			caminoDeLaIA.Add(arbol.getDatoRaiz());
-
+			
+			//Si encontramos el camino a la raiz
 			if (arbol.getDatoRaiz().EsPlanetaDeLaIA())
 			{
 				return caminoDeLaIA;
 			}
 			else
 			{
-					foreach(var hijo in arbol.getHijos())
+				//Se procesan los hijos recursivamente
+				foreach(var hijo in arbol.getHijos())
+				{
+					//Camino auxiliar que va descartando planetas
+					List<Planeta> caminoAux = _caminoAtaqueRaiz(hijo, caminoDeLaIA);
+					if (caminoAux != null)
 					{
-					
-						List<Planeta> caminoAux = CaminoIAaRaiz(hijo, caminoDeLaIA);
-						if (caminoAux != null)
-						{
-							return caminoAux;
-						}
-					
+						return caminoAux;
 					}
-					caminoDeLaIA.RemoveAt(caminoDeLaIA.Count()-1);
+					
+				}
+				//Se elimina el ultimo elemento de la lista de planetas
+				caminoDeLaIA.RemoveAt(caminoDeLaIA.Count()-1);
 			}
 			return null;
 		}
+		
+		public List<Planeta> CaminoAtaqueARaiz(ArbolGeneral<Planeta> arbol){
+			List<Planeta> caminoRaiz = new List<Planeta>();
+			return _caminoAtaqueARaiz(arbol, caminoRaiz);
+		}
 
-		public List<Planeta> CaminoRaizAHumano(ArbolGeneral<Planeta> arbol, List<Planeta> caminoDeRaizAHumano)
+		private List<Planeta> _caminoAtaqueAHumano(ArbolGeneral<Planeta> arbol, List<Planeta> caminoDeRaizAHumano)
 		{
-
+			//Se procesa primero la raiz
 			caminoDeRaizAHumano.Add(arbol.getDatoRaiz());
-
+			
+			//Si se encontro camino..
 			if (arbol.getDatoRaiz().EsPlanetaDelJugador())
 			{
 				return caminoDeRaizAHumano;
 			}
 			else
 			{
-				
+				//Se procesan los hijos recursivamente
 				foreach (var hijo in arbol.getHijos())
 				{
-
-					List<Planeta> caminoAux = CaminoRaizAHumano(hijo, caminoDeRaizAHumano);
+					
+					List<Planeta> caminoAux = _caminoAtaqueAHumano(hijo, caminoDeRaizAHumano);
 					if (caminoAux != null)
 					{
 						return caminoAux;
 					}
 
 				}
-
+				//saco ultimo planeta del dominio
 				caminoDeRaizAHumano.RemoveAt(caminoDeRaizAHumano.Count() - 1);
 
 			}
 			return null;
+		}
+		
+		public List<Planeta> CaminoAtaqueAHumano(ArbolGeneral<Planeta> arbol){
+			List<Planeta> caminoHaciaHumano = new List<Planeta>();
+			return _caminoAtaqueAHumano(arbol, caminoHaciaHumano);
 		}
 	}
 }
