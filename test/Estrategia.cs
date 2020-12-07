@@ -81,7 +81,8 @@ namespace DeepSpace
 
 		public String Consulta3( ArbolGeneral<Planeta> arbol)
 		{
-			// calcular  promedio poblacion por nivel de arbol (recorrido por niveles, sumar en total y cantidad y dividir por cantidad para sacar promedio)
+			/* calcular  promedio poblacion por nivel de arbol (recorrido por niveles,
+			sumar en total y cantidad y dividir por cantidad para sacar promedio)*/
 			Cola<ArbolGeneral<Planeta>> c = new Cola<ArbolGeneral<Planeta>>();
 			
 			//Arbol auxiliar
@@ -184,7 +185,7 @@ namespace DeepSpace
 				foreach(var hijo in arbol.getHijos())
 				{
 					//Camino auxiliar que va descartando planetas
-					List<Planeta> caminoAux = _caminoAtaqueRaiz(hijo, caminoDeLaIA);
+					List<Planeta> caminoAux = _caminoAtaqueARaiz(hijo, caminoDeLaIA);
 					if (caminoAux != null)
 					{
 						return caminoAux;
